@@ -6,18 +6,22 @@ import { selectUsers } from 'redux/users/usersSelections';
 export const UsersPageInfo = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
   return (
-    <ul>
-      {users.map(user => {
-        return (
-          <li key={user.id}>
-            <Link to={`${user.id}`}>{user.name}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <ul>
+        {users.map(user => {
+          return (
+            <li key={user.id}>
+              <Link to={`${user.id}`}>{user.name}</Link>
+            </li>
+          );
+        })}
+      </ul>
+      <Link to="add">Add user</Link>
+    </>
   );
 };

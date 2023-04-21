@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { selectUser } from 'redux/users/usersSelections';
 import { fetchUser } from 'redux/users/usersOperations';
 import { useParams } from 'react-router-dom';
@@ -8,6 +9,7 @@ export const UsersDetailsPage = () => {
   const [isModalOpen, SetIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+
   const { id } = useParams();
   useEffect(() => {
     dispatch(fetchUser(id));
@@ -29,6 +31,9 @@ export const UsersDetailsPage = () => {
       <button type="button" onClick={handleClickDelete}>
         Delete
       </button>
+      <Link to="update" state={user}>
+        Update this user
+      </Link>
       {isModalOpen && <ModalDelete id={id} SetIsModalOpen={SetIsModalOpen} />}
     </>
   );

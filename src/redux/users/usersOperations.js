@@ -37,3 +37,27 @@ export const deleteUserById = createAsyncThunk(
     }
   }
 );
+
+export const AddUser = createAsyncThunk(
+  `/users/addUser`,
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`/users/`, data);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
+export const UpdateUser = createAsyncThunk(
+  `/users/updateUser`,
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`/users/${data.id}`, data);
+      return response.data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
